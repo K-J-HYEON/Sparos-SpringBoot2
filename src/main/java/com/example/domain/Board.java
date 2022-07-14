@@ -3,9 +3,7 @@ package com.example.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -14,9 +12,19 @@ public class Board {
     @Id
     @GeneratedValue
     private Long seq;
+
     private String title;
-    private String writer;
+
+    @Column(updatable = false)
+    private String wriete;
+
     private String content;
-    private Date createDate = new Date();
+
+    @Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
+    private Date createDate;
+
+    @Column(insertable = false, updatable = false, columnDefinition = "number default 0")
     private Long cnt = 0L;
+
+
 }
